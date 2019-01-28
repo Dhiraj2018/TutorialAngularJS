@@ -1,61 +1,27 @@
 var myapp= angular.module("myModule",[]);
 myapp.controller("myController",function($scope){
-    var country=[{
-        name: "USA", capital:"WashingtonDC", flag:
-    }]
-    
-    
-    var employees =[{
-        firstName:"Dhiraj",
-        lastName: "Chhetri",
-        gender: "male"
-    },
-    {
-        firstName:"Manoj",
-        lastName: "Chhetri",
-        gender: "male"
-    }]
-    var countries=[{
-        name: "UK",
-        cities:[
-            {name: "London" },
-            {name: "Birmingham"},
-            {name: "Manchester"},
-        ]
-    },
-    {
-        name: "USA",
-        cities:[
-            {name: 'LosAngles'},
-            {name: "Chicago"},
-            {name: "Hoston"},
-        ]
-    },
-    {
-        name: "India",
-        cities:[
-            {name: "Hyderabad"},
-            {name: "Chennai"},
-            {name: "Mumbai"},
-        ]
-    }]
-
-    technologies=[
-                {name:"C#",likes:0,dislikes:0 },
-                {name:"ASP.net",likes:0,dislikes:0 },
-                {name:"SQL Server",likes:0,dislikes:0 },
-                {name:"AngularJS",likes:0,dislikes:0 }
+    var employees=[
+        {name:"Ben", dateOfBirth: new Date("November 23, 1980"), gender:"Female", salary:555000.889},
+        {name:"Hobbin", dateOfBirth: new Date("September 23, 1980"), gender:"Male", salary:555000.889},
+        {name:"Cary", dateOfBirth: new Date("Jan 23, 1981"), gender:"Female", salary:555000.889},
+        {name:"Cary", dateOfBirth: new Date("Feb 23, 1983"), gender:"Female", salary:555000.889},
+        {name:"Cary", dateOfBirth: new Date("Mar 12, 1986"), gender:"Female", salary:555000.889},
+        {name:"Mark", dateOfBirth: new Date("July 23, 1980"), gender:"Male", salary:555000.889}
     ]
+    $scope.employees= employees
+    $scope.sortColumn="name"
+    $scope.reverseSort= false
     
-    
-    $scope.message = "Welcome to angular JS"
-    $scope.employees=employees
-    $scope.countries= countries
-    $scope.technologies= technologies
-    $scope.incrementLikes= function(technology){
-        technology.likes++
+    $scope.sortData = function (column){
+        $scope.reverseSort = ($scope.sortColumn ==column)? !$scope.reverseSort : false
+        $scope.sortColumn=column
+
     }
-    $scope.incrementDislikes= function(technology){
-        technology.dislikes++
+
+    $scope.getSortClass=function(column){
+        if($scope.sortColumn==column){
+            return $scope.reverseSort ? 'arrow-down': 'arrow-up'
+        }
+        return ''
     }
 })
